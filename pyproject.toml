@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "contenidos_aularagon"
+name = "comunidad_aularagon"
 version = "0.1.0"
 description = ""
 authors = ["deleyva <jesuslopezdeleyva@gmail.com>"]

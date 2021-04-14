@@ -2,8 +2,8 @@ version: "3.9"
 
 services:
   db:
-    hostname: contenidos-db
-    container_name: contenidos-db
+    hostname: comunidad-aularagon-db
+    container_name: comunidad-aularagon-db
     image: postgres
     environment:
       POSTGRES_DB: "${POSTGRES_DB}"
