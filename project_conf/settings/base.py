@@ -25,6 +25,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "home",
     "search",
+    "books",
+    "wagtailcodeblock",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -159,3 +161,15 @@ WAGTAIL_SITE_NAME = "Comunidad Aularagón"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = os.environ.get("BASE_URL")
+
+WAGTAIL_CODE_BLOCK_LANGUAGES = (
+    ("bash", "Bash/Shell"),
+    ("css", "CSS"),
+    ("diff", "diff"),
+    ("html", "HTML"),
+    ("javascript", "Javascript"),
+    ("json", "JSON"),
+    ("python", "Python"),
+    ("scss", "SCSS"),
+    ("yaml", "YAML"),
+)

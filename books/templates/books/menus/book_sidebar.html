@@ -1,0 +1,50 @@
+{% load menu_tags %}
+{% for item in menu_items %}
+<li class="header ">
+    <a href="{{ item.href }}" class="header">
+        {{ item.text }}
+    </a>
+</li>
+{% if item.sub_menu %}
+{% for sub_item in item.sub_menu.items %}
+<li class="header {% if page.get_url == sub_item.href %}active{% endif %}">
+    <a href="{{ sub_item.href }}" class="header">
+        {{ sub_item.text }}
+    </a>
+</li>
+{% if sub_item.sub_menu.items %}
+{% for sub_sub_item in sub_item.sub_menu.items %}
+<li class="chapter {{ sub_sub_item.active_class }}">
+    <a href="{{ sub_sub_item.href }}">
+        {{ sub_sub_item.text }}
+    </a>
+    {% if sub_sub_item.sub_menu.items %}
+    <ul class="articles">
+        {% for inner_item in sub_sub_item.sub_menu.items %}
+        <li class="chapter {{ inner_item.active_class }}" data-level="1.1"
+            data-path="{{ inner_item.href }}">
+            <a href="{{ inner_item.href }}">
+                {{ inner_item.text }}
+            </a>
+            {% if inner_item.sub_menu.items %}
+            <ul class="articles">
+                {% for bottom_item in inner_item.sub_menu.items %}
+                <li class="chapter {{ bottom_item.active_class }}" data-level="1.1.1"
+                    data-path="{{ bottom_item.href }}">
+                    <a href="{{ bottom_item.href }}">
+                        {{ bottom_item.text }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</li>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}

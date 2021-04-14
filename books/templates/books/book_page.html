@@ -1,0 +1,203 @@
+{% load static %}
+
+{% load wagtailadmin_tags wagtailcore_tags wagtailimages_tags coderedcms_tags menu_tags %}
+
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>{{ self.title }}</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="">
+	<meta name="generator" content="GitBook 3.2.3">
+	<link rel="stylesheet" href="{% static 'books/gitbook/style.css' %}">
+	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-image-captions/image-captions.css' %}">
+	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-accordion/accordion.css' %}">
+	<link rel="stylesheet"
+		href="{% static 'books/gitbook/gitbook-plugin-styled-blockquotes/plugin-styled-blockquotes.css' %}">
+	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-highlight/website.css' %}">
+	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-fontsettings/website.css' %}">
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon-precomposed" sizes="152x152"
+		href="{% static 'books/gitbook/images/apple-touch-icon-precomposed-152.png' %}">
+	<link rel="shortcut icon" href="{% static 'books/gitbook/images/favicon.ico' %}" type="image/x-icon">
+	<link rel="next" href="mate_rey_y_dama.html" />
+	<link rel="prev" href="caballo.html" />
+</head>
+
+<body>
+
+	<div class="book">
+		<div class="book-summary">
+			<nav role="navigation">
+				<ul class="summary">
+					{% with menu=menu.handle template="books/menus/book_sidebar.html" %}
+					{% flat_menu menu max_levels=5 template=template show_menu_heading=False add_sub_menus_inline=True apply_active_classes=True %}
+					{% endwith %}
+				</ul>
+			</nav>
+		</div>
+
+		<div class="book-body">
+			<div class="body-inner">
+				<div class="book-header" role="navigation">
+					<!-- Title -->
+					<h1>
+						<i class="fa fa-circle-o-notch fa-spin"></i>
+						<a href=".">{{ self.title }}</a>
+					</h1>
+				</div>
+				<div class="page-wrapper" tabindex="-1" role="main">
+					<div class="page-inner">
+						<section class="normal markdown-section">
+							{% block content %}
+							{% include_block self.body with settings=settings %}
+							
+							{% endblock content %}
+						</section>
+					</div>
+				</div>
+
+			</div>
+			<!-- TODO: añadir variable capaz de acceder a la etiqueta 'menu_instance' -->
+		
+		{% if num_index > 1 %}
+			<a href="{% pageurl prev %}" class="navigation navigation-prev " aria-label="Previous page: El Caballo">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		{% endif %}
+			
+		{% if num_index < num_pages %}
+			<a href="{% pageurl next %}" class="navigation navigation-next "
+				aria-label="Next page: Mate con Rey y Dama">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		{% endif %}
+		</div>
+
+		<script>
+			var gitbook = gitbook || [];
+			gitbook.push(function () {
+				gitbook.page.hasChanged({
+					"page": {
+						"title": "{{ self.title }}",
+						"level": "3.4.5.1",
+						"depth": 3,
+						"next": {
+							"title": "Mate con Rey y Dama",
+							"level": "3.4.5.2",
+							"depth": 3,
+							"path": "mate_rey_y_dama.md",
+							"ref": "mate_rey_y_dama.md",
+							"articles": []
+						},
+						"previous": {
+							"title": "El Caballo",
+							"level": "3.4.5",
+							"depth": 2,
+							"path": "caballo.md",
+							"ref": "caballo.md",
+							"articles": []
+						},
+						"dir": "ltr"
+					},
+					"config": {
+						"plugins": ["edit-link"],
+						"styles": {
+							"website": "styles/website.css",
+							"pdf": "styles/pdf.css",
+							"epub": "styles/epub.css",
+							"mobi": "styles/mobi.css",
+							"ebook": "styles/ebook.css",
+							"print": "styles/print.css"
+						},
+						"pluginsConfig": {
+							"fontsettings": {
+								"theme": "white",
+								"family": "sans",
+								"size": 2
+							},
+							"highlight": {},
+							"sharing": {
+								"facebook": true,
+								"twitter": true,
+								"google": false,
+								"weibo": false,
+								"instapaper": true,
+								"vk": false,
+								"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+							},
+							"edit-link": {
+								"label": "Edita esta página",
+								"base": "http://localhost:8000/admin/pages/{{ self.pk }}/edit"
+							},
+							"theme-default": {
+								"styles": {
+									"website": "styles/website.css",
+									"pdf": "styles/pdf.css",
+									"epub": "styles/epub.css",
+									"mobi": "styles/mobi.css",
+									"ebook": "styles/ebook.css",
+									"print": "styles/print.css"
+								},
+								"showLevel": false
+							},
+						},
+						"theme": "default",
+						"pdf": {
+							"pageNumbers": true,
+							"fontSize": 12,
+							"fontFamily": "Arial",
+							"paperSize": "a4",
+							"chapterMark": "pagebreak",
+							"pageBreaksBefore": "/",
+							"margin": {
+								"right": 62,
+								"left": 62,
+								"top": 56,
+								"bottom": 56
+							}
+						},
+						"structure": {
+							"langs": "LANGS.md",
+							"readme": "README.md",
+							"glossary": "GLOSSARY.md",
+							"summary": "SUMMARY.md"
+						},
+						"variables": {
+							"title": "Ajedrez en la escuela"
+						},
+						"language": "es",
+						"gitbook": "*"
+					},
+					"file": {
+						"path": "",
+						"mtime": "2021-03-03T09:32:22.935Z",
+						"type": "markdown"
+					},
+					"gitbook": {
+						"version": "3.2.3",
+						"time": "2021-03-03T09:41:56.708Z"
+					},
+					"basePath": ".",
+					"book": {
+						"language": ""
+					}
+				});
+			});
+		</script>
+	</div>
+	<script src="{% static 'books/gitbook/gitbook.js' %}"></script>
+	<script src="{% static 'books/gitbook/theme.js' %}"></script>
+	<script src="{% static 'books/gitbook/gitbook-plugin-accordion/accordionSelector.js' %}"></script>
+	<script src="{% static 'books/gitbook/gitbook-plugin-edit-link/plugin.js' %}"></script>
+	<script src="{% static 'books/gitbook/gitbook-plugin-fontsettings/fontsettings.js' %}"></script>
+	<script src="{% static 'books/gitbook/gitbook-plugin-sharing/buttons.js' %}"></script>
+</body>
+
+</html>

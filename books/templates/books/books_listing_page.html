@@ -1,0 +1,22 @@
+{% extends "coderedcms/pages/web_page.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags coderedcms_tags %}
+
+{% block content %}
+    
+    {% for libro in self.get_children %}
+        <div class="card" style="width: 18rem;">
+            {% image libro.specific.cover_image original as photo %}
+            <img class="card-img-top" src="{{ photo.url }}" alt="Card image cap">
+            {{ libro.cover_image.url }}
+            <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+        {{ libro.title }}
+        <a href="/libreria-de-catedu/ajedrez-en-la-escuela/" target="_blank" rel="noopener noreferrer">{{ libro.url }}</a> 
+    {% endfor %}
+        
+{% endblock %}
