@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    environment:
+      DEBUG: "${DEBUG}"
+    command: /start
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - test-nginx_frontend
+
+  db:
+    hostname: comunidad-db
+    container_name: comunidad-db
+    image: postgres
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:4.18
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+      PGADMIN_LISTEN_PORT: 8050
+    ports:
+      - "8050:8050"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    links:
+      - "db:pgsql-server"
+
+volumes:
+  db-data:
+  pgadmin-data:
+
+networks:
+  test-nginx_frontend:
+    external: true

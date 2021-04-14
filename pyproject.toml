@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "contenidos_aularagon"
+version = "0.1.0"
+description = ""
+authors = ["deleyva <jesuslopezdeleyva@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+wagtail = "^2.12.3"
+psycopg2-binary = "^2.8.6"
+wagtailmenus = "^3.0.2"
+pandas = "^1.2.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+django-extensions = "^3.1.2"
+ipython = "^7.22.0"
+jupyterlab = "^3.0.13"
+django-debug-toolbar = "^3.2"
+black = {version = "^20.8b1", allow-prereleases = true}
+python-dotenv = "^0.17.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
