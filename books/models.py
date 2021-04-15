@@ -5,7 +5,7 @@ from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtailcodeblock.blocks import CodeBlock
 
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 
 from wagtailmenus.models import FlatMenu
 
@@ -17,8 +17,6 @@ class BookPage(Page):
 
     class Meta:
         verbose_name = "Página de libro"
-
-    # TODO: Sobreescribir contexto para añadir menú https://docs.wagtail.io/en/stable/getting_started/tutorial.html#overriding-context
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -46,59 +44,57 @@ class BookPage(Page):
         StreamFieldPanel("body"),
     ]
 
-    # parent_page_types = ["books.BookIndexPage", "books.BookPage"]
+    parent_page_types = ["books.BookIndexPage", "books.BookPage"]
 
     subpage_types = ["books.BookPage"]
 
 
-# class BookIndexPage(CoderedArticleIndexPage):
-#     """
-#     Shows a list of book chapters.
-#     """
+class BookIndexPage(Page):
+    """
+    Shows a list of book chapters.
+    """
 
-#     class Meta:
-#         verbose_name = "Índice de libro"
+    class Meta:
+        verbose_name = "Índice de libro"
 
-#     # TODO: crear un menú automáticamente y asignarlo a esta página. Sobre escribir
-#     # contexto https://docs.wagtail.io/en/stable/getting_started/tutorial.html#overriding-context
+    show_in_menus_default = True
 
-#     show_in_menus_default = True
+    flat_menu = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text="Si no está en la lista, se asignará automáticamente cuando crees la página",
+    )
 
-#     flat_menu =  models.CharField(
-#         max_length=255,
-#         null=True,
-#         blank=True,
-#         help_text='Si no está en la lista, se asignará automáticamente cuando crees la página',
-#         )
+    content_panels = [
+        FieldPanel(
+            "flat_menu", classname="full", heading="Índice para la barra lateral"
+        ),
+    ] + Page.content_panels
 
-#     content_panels = [FieldPanel("flat_menu", classname="full", heading="Índice para la barra lateral"),] + CoderedArticleIndexPage.content_panels
+    # Only allow this page to be created beneath an ArticleIndexPage.
+    parent_page_types = ["books.BooksListingPage"]
 
-#     promote_panels = [FieldPanel("show_in_menus")] + CoderedArticlePage.promote_panels
-
-#     # Override to specify custom index ordering choice/default.
-#     index_query_pagemodel = "books.BookPage"
-
-#     # Only allow this page to be created beneath an ArticleIndexPage.
-#     parent_page_types = ["books.BooksListingPage"]
-
-#     # Only allow ArticlePages beneath this page.
-#     subpage_types = ["books.BookPage"]
+    # Only allow ArticlePages beneath this page.
+    subpage_types = ["books.BookPage"]
 
 
-# class BooksListingPage(CoderedArticleIndexPage):
-#     """
-#     Shows a list of books sub-pages.
-#     """
+class BooksListingPage(Page):
+    """
+    Shows a list of books.
+    """
 
-#     class Meta:
-#         verbose_name = "Listado de libros de CATEDU"
+    class Meta:
+        verbose_name = "Listado de libros de CATEDU"
 
-#     show_in_menus_default = True
+    def get_context(self, request):
+        """Añadiendo libros a este listado"""
+        context = super().get_context(request)
+        context["books"] = BookIndexPage.objects.all()
+        return context
 
-#     promote_panels = [FieldPanel("show_in_menus")] + CoderedArticlePage.promote_panels
+    # Override to specify custom index ordering choice/default.
+    index_query_pagemodel = "books.BookIndexPage"
 
-#     # Override to specify custom index ordering choice/default.
-#     index_query_pagemodel = "books.BookIndexPage"
-
-#     # Only allow ArticlePages beneath this page.
-#     subpage_types = ["books.BookIndexPage"]
+    # Only allow ArticlePages beneath this page.
+    subpage_types = ["books.BookIndexPage"]

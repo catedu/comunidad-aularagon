@@ -162,6 +162,10 @@ WAGTAIL_SITE_NAME = "Comunidad Aularagón"
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = os.environ.get("BASE_URL")
 
+TAGGIT_CASE_INSENSITIVE = True
+
+WAGTAIL_ALLOW_UNICODE_SLUGS = False
+
 WAGTAIL_CODE_BLOCK_LANGUAGES = (
     ("bash", "Bash/Shell"),
     ("css", "CSS"),

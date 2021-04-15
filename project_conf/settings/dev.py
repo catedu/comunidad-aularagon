@@ -61,7 +61,7 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 
 def show_toolbar(request):
-    return True
+    return False
 
 
 DEBUG_TOOLBAR_CONFIG = {
