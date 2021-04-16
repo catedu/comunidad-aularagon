@@ -3,11 +3,12 @@ from django.db import models
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
-from wagtailcodeblock.blocks import CodeBlock
 
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 
 from wagtailmenus.models import FlatMenu
+
+from books.blocks import CodeBlock
 
 
 class BookPage(Page):
@@ -35,8 +36,33 @@ class BookPage(Page):
 
     body = StreamField(
         [
-            ("paragraph", blocks.RichTextBlock(label="Contenido")),
-            ("code", CodeBlock(label="Código")),
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    label="Contenido",
+                    features=[
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "bold",
+                        "italic",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "link",
+                        "document-link",
+                        "image",
+                        "embed",
+                        "code",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
+                        "blockquote",
+                    ],
+                ),
+            ),
+            ("code", CodeBlock(label="Code")),
         ]
     )
 

@@ -1,6 +1,6 @@
 {% load static %}
 
-{% load wagtailadmin_tags wagtailcore_tags wagtailimages_tags coderedcms_tags menu_tags %}
+{% load wagtailadmin_tags wagtailcore_tags wagtailimages_tags menu_tags %}
 
 <!DOCTYPE HTML>
 <html lang="es">
@@ -107,7 +107,7 @@
 						"dir": "ltr"
 					},
 					"config": {
-						"plugins": ["edit-link"],
+						"plugins": ["edit-link","download-pdf-link"],
 						"styles": {
 							"website": "styles/website.css",
 							"pdf": "styles/pdf.css",
@@ -133,8 +133,11 @@
 								"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
 							},
 							"edit-link": {
-								"label": "Edita esta página",
+								"label": "",
 								"base": "http://localhost:8000/admin/pages/{{ self.pk }}/edit"
+							},
+							"download-pdf-link": {
+      							"base": "https://www.gitbook.com/book/poppy-project/poppy-docs/"
 							},
 							"theme-default": {
 								"styles": {
@@ -197,6 +200,7 @@
 	<script src="{% static 'books/gitbook/gitbook-plugin-accordion/accordionSelector.js' %}"></script>
 	<script src="{% static 'books/gitbook/gitbook-plugin-edit-link/plugin.js' %}"></script>
 	<script src="{% static 'books/gitbook/gitbook-plugin-fontsettings/fontsettings.js' %}"></script>
+	<script src="{% static 'books/gitbook/gitbook-plugin-download-pdf-link/plugin.js' %}"></script>
 	<script src="{% static 'books/gitbook/gitbook-plugin-sharing/buttons.js' %}"></script>
 </body>
 
