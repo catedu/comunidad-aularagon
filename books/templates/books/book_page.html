@@ -17,8 +17,9 @@
 	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-accordion/accordion.css' %}">
 	<link rel="stylesheet"
 		href="{% static 'books/gitbook/gitbook-plugin-styled-blockquotes/plugin-styled-blockquotes.css' %}">
-	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-highlight/website.css' %}">
 	<link rel="stylesheet" href="{% static 'books/gitbook/gitbook-plugin-fontsettings/website.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/prism.css' %}">
+	<script src="{% static 'js/prism.js' %}"></script>
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -122,7 +123,6 @@
 								"family": "sans",
 								"size": 2
 							},
-							"highlight": {},
 							"sharing": {
 								"facebook": true,
 								"twitter": true,
