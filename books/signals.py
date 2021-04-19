@@ -16,8 +16,9 @@ def create_menu(sender, instance, created, **kwargs):
                 site_id=2,
                 max_levels=5,
             )
-            instance.flat_menu = menu.handle
+            instance.flat_menu_id = menu.pk
             instance.save()
+            print(instance)
             FlatMenuItem.objects.create(
                 link_page_id=instance.pk, menu_id=menu.pk, allow_subnav=1
             )
