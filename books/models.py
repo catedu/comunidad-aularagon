@@ -93,12 +93,6 @@ class BookIndexPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    # flat_menu = models.CharField(
-    #     max_length=255,
-    #     null=True,
-    #     blank=True,
-    #     help_text="Si no está en la lista, se asignará automáticamente cuando crees la página",
-    # )
 
     content_panels = [
         FieldPanel(
