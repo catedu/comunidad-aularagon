@@ -4,3 +4,5 @@ SETTINGS_SELECTION=dev
 POSTGRES_DB=mi_app_db
 POSTGRES_USER=mi_app_db_usuario
 POSTGRES_PASSWORD=mi_app_db_contraseña
+MOODLE_API_KEY=<key-para-la-api>
+URL=https://moodle.catedu.es

@@ -10,7 +10,10 @@ wagtail = "^2.12.3"
 psycopg2-binary = "^2.8.6"
 wagtailmenus = "^3.0.2"
 pandas = "^1.2.3"
-wagtailcodeblock = "^1.17.1"
+redis = "^3.5.3"
+celery = "^5.0.5"
+django-celery-results = "^2.0.1"
+django-celery-beat = "^2.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
