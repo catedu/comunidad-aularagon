@@ -25,6 +25,10 @@ python manage.py runserver
 
 ## Características incluídas
 
+* Programación de tareas usando [celery](https://docs.celeryproject.org/en/stable/) con [redis](https://www.google.com/search?q=redis&oq=redis&aqs=chrome..69i57j69i65l2.2248j0j4&sourceid=chrome&ie=UTF-8). Uso los paquetes [django-celery-results](https://pypi.org/project/django-celery-results/) y [django-celery-beat](https://pypi.org/project/django-celery-beat/) para la administración vía web. Para iniciar el scheduler y el worker:
+  * `celery -A project_conf beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler`
+  * `celery -A project_conf worker -l INFO`
+
 ### Desarrollo
 
 * [Django Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
@@ -33,5 +37,6 @@ python manage.py runserver
 * Formateado de código usando [Black](https://github.com/psf/black)
 
 TODOs para desplegar en producción con docker-deploy
+
 * Hacer que docker-compose no trate de generar los estáticos de librearías de desarrollo
 * Hacer que docker-compose local sirva correctamente css y js
