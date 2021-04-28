@@ -5,19 +5,19 @@ services:
     build: .
     environment:
       DEBUG: "${DEBUG}"
-    command: /start
+      SECRET: "${SECRET_KEY}"
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     depends_on:
       - db
-    networks:
-      - test-nginx_frontend
+    # networks:
+    #   - test-nginx_frontend
 
   db:
-    hostname: comunidad-db
-    container_name: comunidad-db
+    hostname: comunidad-db-pro
+    container_name: comunidad-db-pro
     image: postgres
     environment:
       POSTGRES_DB: "${POSTGRES_DB}"
@@ -29,23 +29,22 @@ services:
     ports:
       - "5432:5432"
 
-  pgadmin:
-    image: dpage/pgadmin4:4.18
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
-      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
-      PGADMIN_LISTEN_PORT: 8050
-    ports:
-      - "8050:8050"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    links:
-      - "db:pgsql-server"
+  # pgadmin:
+  #   image: dpage/pgadmin4:4.18
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+  #     PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+  #     PGADMIN_LISTEN_PORT: 8050
+  #   ports:
+  #     - "8050:8050"
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+  #   links:
+  #     - "db:pgsql-server"
 
 volumes:
   db-data:
-  pgadmin-data:
-
-networks:
-  test-nginx_frontend:
-    external: true
+  # pgadmin-data:
+# networks:
+#   test-nginx_frontend:
+#     external: true

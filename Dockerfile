@@ -32,8 +32,7 @@ COPY pyproject.toml .
 
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
-RUN poetry install 
-# --no-dev
+RUN poetry install --no-dev
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -50,7 +49,8 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 
 # Collect static files.
-# RUN python manage.py collectstatic --noinput --clear
+RUN echo $DEBUG
+RUN python manage.py collectstatic --noinput --clear
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
@@ -61,4 +61,4 @@ USER wagtail
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn project_conf.wsgi:application
+CMD python manage.py migrate --noinput; gunicorn project_conf.wsgi:application
