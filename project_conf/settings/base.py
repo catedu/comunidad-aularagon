@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "search",
     "books",
     "moodle_admin",
+    "github_admin",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
