@@ -3,10 +3,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    {{ self.get_children }}
-    a ver
-    {{ self.specific.books }}
-    <!-- {% for libro in self.books %}
+    {% for libro in books %}
         <div class="card" style="width: 18rem;">
             {% image libro.specific.cover_image original as photo %}
             <img class="card-img-top" src="{{ photo.url }}" alt="Card image cap">
@@ -19,6 +16,6 @@
         </div>
         {{ libro.title }}
         <a href="/libreria-de-catedu/ajedrez-en-la-escuela/" target="_blank" rel="noopener noreferrer">{{ libro.url }}</a> 
-    {% endfor %} -->
+    {% endfor %}
         
 {% endblock %}
