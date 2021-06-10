@@ -16,9 +16,8 @@ django-celery-results = "^2.0.1"
 django-celery-beat = "^2.2.0"
 MechanicalSoup = "^1.0.0"
 PyGithub = "^1.55"
-google-api-python-client = "^2.7.0"
-google-auth-httplib2 = "^0.1.0"
-google-auth-oauthlib = "^0.4.4"
+pygsheets = "^2.0.5"
+rapidfuzz = "^1.4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
