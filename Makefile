@@ -18,3 +18,14 @@ dcup_local_build:
 
 dcup_all:
 	docker-compose up
+
+up:
+	docker-compose -f docker-compose.local.yml up -d
+	docker run --rm -p 6379:6379 --name another-redis -d redis
+	python manage.py runserver
+
+redis_worker:
+	celery -A project_conf worker -l INFO
+
+redis_beat:
+	celery -A project_conf beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
