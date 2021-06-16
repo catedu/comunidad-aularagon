@@ -40,3 +40,9 @@ TODOs para desplegar en producción con docker-deploy
 
 * Hacer que docker-compose no trate de generar los estáticos de librearías de desarrollo
 * Hacer que docker-compose local sirva correctamente css y js
+
+### Integraciones especiales para CATEDU
+
+* Edición de Google Sheets vía api
+* Acceso a la API de Github
+* Acceso a la API de Moodle

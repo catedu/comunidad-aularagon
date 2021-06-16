@@ -18,6 +18,8 @@ MechanicalSoup = "^1.0.0"
 PyGithub = "^1.55"
 pygsheets = "^2.0.5"
 rapidfuzz = "^1.4.1"
+you-get = "^0.4.1527"
+chardet = "^4.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
