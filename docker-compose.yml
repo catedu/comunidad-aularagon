@@ -4,8 +4,8 @@ services:
   web:
     build: .
     environment:
-      DEBUG: "${DEBUG}"
-      SECRET: "${SECRET_KEY}"
+      - DEBUG: "${DEBUG}"
+      - SECRET: "${SECRET_KEY}"
     volumes:
       - .:/app
     ports:
@@ -29,22 +29,8 @@ services:
     ports:
       - "5432:5432"
 
-  # pgadmin:
-  #   image: dpage/pgadmin4:4.18
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
-  #     PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
-  #     PGADMIN_LISTEN_PORT: 8050
-  #   ports:
-  #     - "8050:8050"
-  #   volumes:
-  #     - pgadmin-data:/var/lib/pgadmin
-  #   links:
-  #     - "db:pgsql-server"
-
 volumes:
   db-data:
-  # pgadmin-data:
 # networks:
 #   test-nginx_frontend:
 #     external: true
