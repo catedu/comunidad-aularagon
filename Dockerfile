@@ -3,7 +3,7 @@ FROM python:3.8.1-slim-buster
 
 # Add user that will be used in the container.
 RUN useradd wagtail
-RUN echo $DEBUG
+
 # Port used by this container to serve HTTP.
 EXPOSE 8000
 
@@ -49,8 +49,7 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 
 # Collect static files.
-RUN echo $DEBUG
-RUN python manage.py collectstatic --noinput --clear
+# RUN python manage.py collectstatic --noinput --clear
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
@@ -61,4 +60,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD python manage.py migrate --noinput; gunicorn project_conf.wsgi:application
+CMD python manage.py makemigrations; python manage.py migrate --noinput; gunicorn project_conf.wsgi:application
