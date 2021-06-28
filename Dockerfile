@@ -28,11 +28,8 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
 RUN pip install "gunicorn==20.0.4"
 
 # Install the project requirements.
-COPY pyproject.toml .
-
-RUN pip install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-dev
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -49,7 +46,7 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 
 # Collect static files.
-# RUN python manage.py collectstatic --noinput --clear
+# RUN python manage.py collectstatic --noinput --clear --settings project_conf.settings.production
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
@@ -60,4 +57,4 @@ USER wagtail
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD python manage.py makemigrations; python manage.py migrate --noinput; gunicorn project_conf.wsgi:application
+CMD set -xe; python manage.py migrate --noinput; gunicorn project_conf.wsgi:application

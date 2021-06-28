@@ -1,19 +1,33 @@
 version: "3.9"
 
 services:
-  web:
+  nginx:
+    build: ./nginx
+    hostname: nginx_comunidad
+    volumes:
+      - ./static:/code/static
+      - ./media:/code/media
+    restart: always
+    ports:
+      - "81:80"
+    networks:
+      - backend
+
+  web_pro:
+    hostname: comunidad-web-pro
+    container_name: comunidad-web-pro
     build: .
     env_file: .env
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     depends_on:
-      - db
-    # networks:
-    #   - test-nginx_frontend
+      - db_pro
+    networks:
+      - backend
 
-  db:
+  db_pro:
     hostname: comunidad-db-pro
     container_name: comunidad-db-pro
     image: postgres
@@ -23,12 +37,16 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       PGDATA: /var/lib/postgresql/data
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data-pro:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - backend
 
 volumes:
-  db-data:
-# networks:
-#   test-nginx_frontend:
-#     external: true
+  db-data-pro:
+networks:
+  soporte_catedu_aragon_frontend:
+    external: true
+  backend:
+    driver: bridge
