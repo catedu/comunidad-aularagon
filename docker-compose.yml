@@ -4,6 +4,7 @@ services:
   nginx:
     build: ./nginx
     hostname: nginx_comunidad
+    # command: set -xe; python manage.py migrate --noinput; gunicorn project_conf.wsgi:application
     volumes:
       - ./static:/code/static
       - ./media:/code/media
@@ -27,6 +28,37 @@ services:
     networks:
       - backend
 
+  # redis:
+  #   image: "redis:alpine"
+  #   networks:
+  #     - backend
+
+  # celery_worker:
+  #   build: .
+  #   command: celery -A project_conf worker -l INFO
+  #   env_file: .env
+  #   volumes:
+  #     - .:/usr/src/app
+  #   depends_on:
+  #     - web_pro
+  #     - redis
+  #   networks:
+  #     - backend
+
+  # celery_beat:
+  #   build: .
+  #   command: celery -A project_conf beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+  #   env_file: .env
+  #   volumes:
+  #     - .:/usr/src/app
+  #   depends_on:
+  #     - web_pro
+  #     - redis
+  #     - celery_worker
+  #     - db_pro
+  #   networks:
+  #     - backend
+
   db_pro:
     hostname: comunidad-db-pro
     container_name: comunidad-db-pro
@@ -46,7 +78,7 @@ services:
 volumes:
   db-data-pro:
 networks:
-  soporte_catedu_aragon_frontend:
-    external: true
+  # soporte_catedu_aragon_frontend:
+  #   external: true
   backend:
     driver: bridge
